@@ -11,7 +11,7 @@ export default function Login() {
     const onSubmitForm = async (event) => {
         event.preventDefault()
         try {
-            var res = await axios.post("https://impossible-flannel-nightgown-worm.cyclic.app/api/v1/user/login/", userDetails)
+            var res = await axios.post("http://localhost:8089/api/v1/user/login", userDetails)
             console.log(res)
         } catch (error) {
             console.log(error)

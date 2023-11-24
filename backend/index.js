@@ -2,11 +2,14 @@ var express = require("express");
 var userRoutes = require("./routes/User")
 var employeeRoutes = require('./routes/Employee')
 const mongoose = require('mongoose')
+const cors = require('cors');
+
 var SERVER_PORT = 8089
 
 var app = express()
 var apiV1 = express()
 
+app.use(cors());
 const DB_CONNECTION_STRING = "mongodb+srv://rodrigo:YHzLdkuvhwHQ8ZUZ@cluster0.bbqnvc3.mongodb.net/comp3123_assigment1?retryWrites=true&w=majority"
 mongoose.connect(DB_CONNECTION_STRING,{
     useNewUrlParser:true,
