@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, createContext } from 'react'
 import axios from 'axios'
+import { useUser } from '../App';
+import { Navigate } from 'react-router';
 
-
+const UserContext = createContext()
 export default function Login() {
+    const { userData, setUserData } = useUser();
     const [userDetails, setUserDetails] = useState({
         username: '',
         password: ''
     })
-
+    debugger
     const onSubmitForm = async (event) => {
         event.preventDefault()
         try {
             var res = await axios.post("http://localhost:8089/api/v1/user/login", userDetails)
+            //save user data
+            setUserData(res.data)
             console.log(res)
         } catch (error) {
             console.log(error)
@@ -45,6 +50,7 @@ export default function Login() {
                     type="submit"
                     value="Login" />
             </form>
+            {userData.jwt_token && <Navigate to={"/"}/>}
         </div>
     )
 }

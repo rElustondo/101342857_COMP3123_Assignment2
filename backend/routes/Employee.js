@@ -5,7 +5,11 @@ const jwt = require("jsonwebtoken")
 const EmployeeModel = require("../models/Employee")
 
 const verifyToken = (req, res, next) => {
-    const token = req.body.jwtToken;
+    let token = req.headers.authorization;
+    if(token == undefined){
+        token = req.body.jwtToken
+    }
+    console.log(token)
 
     if (!token) {
         return res.status(401).json({ status: false, message: 'Unauthorized' });
