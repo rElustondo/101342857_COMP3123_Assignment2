@@ -7,6 +7,7 @@ import { Link, NavLink } from 'react-router-dom';
 export default function Homepage() {
     const { userData, setUserData } = useUser();
     let [empData, setEmpData] = useState([])
+    let [deletedID, setDeletedID] = useState(null)
     debugger
     useEffect(()=>{
         debugger
@@ -29,8 +30,29 @@ export default function Homepage() {
         if(userData && userData.jwt_token){
             getEmployees()
         }
-    },[userData])
+    },[userData,deletedID])
     
+    const deleteButton = async (id) => {
+        debugger
+        try {
+            debugger
+            const response = await axios.delete(`http://localhost:8089/api/v1/emp/employees?eid=${id}`,{
+                headers: {
+                    Authorization: userData.jwt_token
+                }
+            })
+            debugger
+            
+            console.log("deleted", response)
+            setDeletedID(response.data._id)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const signOut = ()=>{
+        localStorage.removeItem("user");
+        setUserData({})
+    }
     return userData.jwt_token ? (
         <div>
             {`Welcome, ${userData.username}`}
@@ -51,7 +73,7 @@ export default function Homepage() {
                                 <Link to={`/add-employee/${i}`}>Update</Link>
                             </div>
                             <div>
-                                <Link>Delete</Link>
+                                <button onClick={()=>{deleteButton(emp._id)}}>Delete</button>
                             </div>
                             <div>
                                 <Link to={`/view-employee/${i}`}>View</Link>
@@ -62,6 +84,7 @@ export default function Homepage() {
                
             </table>
             <NavLink to="/add-employee/_add">Add Employee</NavLink>
+            <button onClick={()=>{signOut()}}>log out</button>
         </div>
     ) : (
         <Navigate to={'/login'}/>

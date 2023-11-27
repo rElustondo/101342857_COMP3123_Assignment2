@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext } from 'react'
 import axios from 'axios'
 import { useUser } from '../App';
 import { Navigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const UserContext = createContext()
 export default function Login() {
@@ -16,6 +17,7 @@ export default function Login() {
         try {
             var res = await axios.post("http://localhost:8089/api/v1/user/login", userDetails)
             //save user data
+            localStorage.setItem("user", JSON.stringify(res.data));
             setUserData(res.data)
             console.log(res)
         } catch (error) {
@@ -51,6 +53,7 @@ export default function Login() {
                     value="Login" />
             </form>
             {userData.jwt_token && <Navigate to={"/"}/>}
+            <Link to="/signup">Sign up</Link>
         </div>
     )
 }

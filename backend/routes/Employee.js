@@ -85,7 +85,7 @@ employeeRoutes.delete("/employees",verifyToken,async (req,res)=>{
             res.status(200).send({status:false, message: "Book Not found"})
         }
         else{
-            res.status(200).send(book)
+            res.status(200).send(employee)
         }
     }catch(error){
         res.status(500).send(error)
