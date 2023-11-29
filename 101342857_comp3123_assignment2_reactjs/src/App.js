@@ -9,6 +9,7 @@ import AddEmployee from './components/AddEmployee';
 import ViewEmployee from './components/ViewEmployee';
 import UpdateEmployee from './components/UpdateEmployee';
 import Signup from './components/Signup';
+import Container from '@mui/material/Container';
 
 export function useUser() {
   return useContext(UserContext);
@@ -23,14 +24,19 @@ function App() {
   return (
     <UserProvider value={{userData,setUserData}}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/add-employee/:id" element={<UpdateEmployee/>} />
-          <Route path="/view-employee/:id" element={<ViewEmployee/>} />
-          <Route path="/add-employee/_add" element={<AddEmployee/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path='/' element={<Homepage/>}/>
-        </Routes>
+        <nav>
+          <NavLink to="/"><h1>Employee Management App</h1></NavLink>
+        </nav>
+        <Container style={{width: "fit-content"}} >
+          <Routes>
+            <Route path="/add-employee/:id" element={<UpdateEmployee/>} />
+            <Route path="/view-employee/:id" element={<ViewEmployee/>} />
+            <Route path="/add-employee/_add" element={<AddEmployee/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<Signup/>} />
+            <Route path='/' element={<Homepage/>}/>
+          </Routes>
+        </Container>
       </BrowserRouter>
     </UserProvider>
   );

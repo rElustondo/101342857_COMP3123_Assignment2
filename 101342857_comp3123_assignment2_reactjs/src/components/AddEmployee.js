@@ -3,6 +3,7 @@ import { Navigate } from 'react-router';
 import { useUser } from '../App';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
+import { Button, Paper, TextField } from '@mui/material';
 
 
 export default function AddEmployee() {
@@ -37,21 +38,33 @@ export default function AddEmployee() {
         })
     }
   return userData.jwt_token ? (
-    <div>
+    <Paper elevation={3} style={{width: "fit-content", padding: "50px"}} >
         <h1>Add Employee</h1>
         <form onSubmit={(e) => onSubmitForm(e)}>
-            <input type='text' onChange={onValueChanged} placeholder='first name' name='first_name'/>
-            <input type='text' onChange={onValueChanged} placeholder='last name' name='last_name'/>
-            <input type='text' onChange={onValueChanged} placeholder='email' name='email'/>
-            <input type='text' onChange={onValueChanged} placeholder='gender' name='gender'/>
-            <input type='text' onChange={onValueChanged} placeholder='salary' name='salary'/>
-            <input type='submit' />
+            <div>
+                <TextField label="First Name" variant="standard" onChange={onValueChanged} name='first_name' />
+            </div>
+            <div>
+                <TextField label="Last Name" variant="standard" onChange={onValueChanged} name='last_name' />
+            </div>
+            <div>
+                <TextField label="Email" variant="standard" onChange={onValueChanged} name='email' />
+            </div>
+            <div>
+                <TextField label="Gender" variant="standard" onChange={onValueChanged} name='gender'  />
+            </div>
+            <div>
+                <TextField label="Salary" variant="standard" onChange={onValueChanged} name='salary' />
+            </div>
+            <Button type='submit' >Submit</Button>
         </form>
-        <Link to="/">Cancel</Link>
+        <Button component={Link} to="/" color='primary'>Cancel</Button>
         {formSubmitted && <Navigate to={"/"}/>
         }
-    </div>
+    </Paper>
   ) :  (
     <Navigate to={'/login'}/>
   )
 }
+
+

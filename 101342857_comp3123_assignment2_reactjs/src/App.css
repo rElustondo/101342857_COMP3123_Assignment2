@@ -23,11 +23,21 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.inputDiv{
+  margin: 10px;
+  margin-left: 0px;
+}
 
 .App-link {
   color: #61dafb;
 }
-
+nav{
+  background-color: lightgreen;
+}
+nav h1{
+  padding: 20px;
+  margin: unset;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -3,7 +3,8 @@ import { Navigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useUser } from '../App';
 import axios from 'axios';
-
+import { Button, TextField } from '@mui/material';
+import '../App.css'
 export default function UpdateEmployee() {
     const { id } = useParams();
     const { userData, setUserData } = useUser();
@@ -67,30 +68,25 @@ export default function UpdateEmployee() {
     return userData.jwt_token ? (
     <div>
         <h1>Update Employee</h1>
-        <form onSubmit={(e) => onSubmitForm(e)}>
-            <div>
-                <h3>First Name</h3>
-                <input type='text' defaultValue={employeeDetails&&employeeDetails.first_name} onChange={onValueChanged} placeholder='first name' name='first_name'/>
+        <form onSubmit={(e) => onSubmitForm(e)} key={employeeDetails && JSON.stringify(employeeDetails)}>
+            <div className='inputDiv'>
+                <TextField defaultValue={employeeDetails&&employeeDetails.first_name} label="First Name" variant="standard" onChange={onValueChanged} name='first_name'  />
             </div>
-            <div>
-                <h3>Last Name</h3>
-                <input type='text' defaultValue={employeeDetails&&employeeDetails.last_name} onChange={onValueChanged} placeholder='last name' name='last_name'/>
+            <div className='inputDiv'>
+                <TextField defaultValue={employeeDetails&&employeeDetails.last_name} label="Last Name" variant="standard" onChange={onValueChanged} name='last_name' />
             </div>
-            <div>
-                <h3>Email</h3>
-                <input type='text'  defaultValue={employeeDetails&&employeeDetails.email} onChange={onValueChanged} placeholder='email' name='email'/>
+            <div className='inputDiv'>
+                <TextField defaultValue={employeeDetails&&employeeDetails.email} label="Email" variant="standard" onChange={onValueChanged} name='email'  />
             </div>
-            <div>
-                <h3>Gender</h3>
-                <input type='text'  defaultValue={employeeDetails&&employeeDetails.gender} onChange={onValueChanged} placeholder='gender' name='gender'/>
+            <div className='inputDiv'>
+                <TextField defaultValue={employeeDetails&&employeeDetails.gender} label="Gender" variant="standard" onChange={onValueChanged} name='gender'  />
             </div>
-            <div>
-                <h3>Salary</h3>
-                <input type='text'  defaultValue={employeeDetails&&employeeDetails.salary} onChange={onValueChanged} placeholder='salary' name='salary'/>
+            <div className='inputDiv'>
+                <TextField defaultValue={employeeDetails&&employeeDetails.salary} label="Salary" variant="standard" onChange={onValueChanged} name='salary' />
             </div>
-            <input type='submit' />
+            <Button type='submit' >Submit</Button>
         </form>
-        <Link to="/">Cancel</Link>
+        <Button component={Link} to="/">Cancel</Button>
         {formSubmitted && <Navigate to={"/"}/>
         }
     </div>

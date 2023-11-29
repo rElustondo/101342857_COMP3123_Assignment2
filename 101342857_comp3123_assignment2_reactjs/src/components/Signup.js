@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Navigate } from 'react-router'
@@ -31,28 +32,37 @@ export default function Signup() {
     <div>
         <h1>Sign up</h1>
         <form onSubmit={(e) => onSubmitForm(e)}>
-            <input 
-                type="text"
-                name="username"
-                onChange={(e) => onValueChanged(e)} 
-                placeholder="Enter Username or email"
-            />
-            <input 
-                type="email"
-                name="email"
-                onChange={(e) => onValueChanged(e)} 
-                placeholder="Enter Email"
-            />
-            <input 
-                type="password"
-                name="password"
-                onChange={(e) => onValueChanged(e)} 
-                placeholder="Enter Password"
-            />
-            <input 
-                name='btnSubmit'
-                type="submit"
-                value="Sign up" />
+            <div className='inputDiv'>
+                <TextField 
+                    label="Username"
+                    name="username"
+                    onChange={(e) => onValueChanged(e)} 
+                    placeholder="Enter Username"
+                />
+            </div>
+            <div className='inputDiv'>
+                <TextField 
+                    label="Email"
+                    name="email"
+                    onChange={(e) => onValueChanged(e)} 
+                    placeholder="Enter email"
+                />
+            </div>
+            <div className='inputDiv'>
+                <TextField
+                    label="Password"
+                    type='password'
+                    name="password"
+                    onChange={(e) => onValueChanged(e)} 
+                    placeholder="Enter Password"
+                />
+            </div>
+            <div className='inputDiv'>
+                <TextField 
+                    name='btnSubmit'
+                    type="submit"
+                    value="Sign up" />
+            </div>
         </form>
         {registered && <Navigate to={"/login"}/>}
     </div>
